@@ -1,0 +1,21 @@
+<h2>Hello world</h2>
+<button id="sayhello" onclick="sayhello()">Say Hello!</button>
+<div>
+    <textarea id="text" style="width: 100%">text goes here</textarea>
+</div>
+<script>
+    function sayhello() {
+        parent.postMessage({ pluginMessage: { type: 'sayhello' } }, '*');
+    }
+
+    window.onmessage = event => {
+        const { pluginMessage } = event.data;
+        console.log('got this from the plugin code', event.data);
+
+        if (pluginMessage.type == 'sayhello') {
+            let ele = document.getElementById('text');
+            ele.textContent = pluginMessage.data;
+            console.log('should update...');
+        }
+    };
+</script>
