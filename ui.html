@@ -10,12 +10,14 @@
 
     <button id="run" onclick="run()">Run</button>
     <button id="clear" onclick="clearTextarea()">Clear</button>
-    <p id="status"></p>
+    <div style="font-size: 12px">
+        <p id="status"></p>
+        <p id="errors" style="color: orangered"></p>
+    </div>
 
     <div style="padding: 0.5rem; box-sizing: border-box">
         <textarea id="text" style="width: 100%; min-height: 150px" placeholder="Your header will go here..."></textarea>
     </div>
-    <p id="errors"></p>
 
     <button id="save" onclick="saveToFile()">Save</button>
 </div>
@@ -38,6 +40,7 @@
         ele.textContent = '';
     }
     function clearTextarea() {
+        clearError();
         let ele = document.getElementById('text');
         ele.textContent = '';
     }
@@ -56,6 +59,7 @@
 
     /****** Main ******/
     function run() {
+        clearError();
         clearTextarea();
         writeStatus('Generating. Please wait, this may take a few seconds...');
         setTimeout(() => {
@@ -64,9 +68,14 @@
     }
 
     function saveToFile() {
+        clearError();
         let ele = document.getElementById('text');
         const text = ele.textContent;
-        saveAs(text, 'CSS2JUCE.h');
+        if (text.length == 0) {
+            writeError('No text to save!');
+        } else {
+            saveAs(text, 'CSS2JUCE.h');
+        }
     }
 
     window.onmessage = event => {
