@@ -24,6 +24,7 @@
 <script>
     /****** Helpful *******/
     function writeError(msg) {
+        clearStatus();
         let ele = document.getElementById('errors');
         ele.textContent = msg;
     }
@@ -32,6 +33,7 @@
         ele.textContent = '';
     }
     function writeStatus(msg) {
+        clearError();
         let ele = document.getElementById('status');
         ele.textContent = msg;
     }
@@ -59,7 +61,6 @@
 
     /****** Main ******/
     function run() {
-        clearError();
         clearTextarea();
         writeStatus('Generating. Please wait, this may take a few seconds...');
         setTimeout(() => {
@@ -86,6 +87,9 @@
             let ele = document.getElementById('text');
             ele.textContent = pluginMessage.data;
             clearStatus();
+        } else if (pluginMessage.type == 'noselection') {
+            clearStatus();
+            writeError('Nothing selected!');
         }
     };
 </script>

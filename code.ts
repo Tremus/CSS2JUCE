@@ -83,7 +83,7 @@ const parseToRectangle = (node: SceneNode): Rectangle => {
     const rect = new Rectangle(node.name, node.x, node.y, node.width, node.height);
 
     if ('children' in node) {
-        console.log(`${node.name} has ${node.children.length} children`);
+        // console.log(`${node.name} has ${node.children.length} children`);
         for (let i = 0; i < node.children.length; i++) {
             const child = node.children[i];
             const nextRect = parseToRectangle(child);
@@ -102,20 +102,22 @@ figma.ui.onmessage = msg => {
 
     if (msg.type === 'run') {
         const selection = figma.currentPage.selection;
-        console.log(selection);
+        // console.log(selection);
 
-        let text = '';
-        text += HEADER_START;
-        for (let [idx, listItem] of selection.entries()) {
-            console.log('looping');
-            console.log(idx, listItem);
-            let rect = parseToRectangle(listItem);
+        if (selection.length == 0) {
+            figma.ui.postMessage({ type: 'noselection' });
+        } else {
+            let text = '';
+            text += HEADER_START;
+            for (let [idx, listItem] of selection.entries()) {
+                let rect = parseToRectangle(listItem);
 
-            text += rect.toString();
+                text += rect.toString();
+            }
+            text += HEADER_END;
+
+            figma.ui.postMessage({ type: 'output', data: text });
         }
-        text += HEADER_END;
-
-        figma.ui.postMessage({ type: 'output', data: text });
     }
 
     // Make sure to close the plugin when you're done. Otherwise the plugin will

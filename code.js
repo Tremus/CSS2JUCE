@@ -65,7 +65,7 @@ class Rectangle {
 const parseToRectangle = (node) => {
     const rect = new Rectangle(node.name, node.x, node.y, node.width, node.height);
     if ('children' in node) {
-        console.log(`${node.name} has ${node.children.length} children`);
+        // console.log(`${node.name} has ${node.children.length} children`);
         for (let i = 0; i < node.children.length; i++) {
             const child = node.children[i];
             const nextRect = parseToRectangle(child);
@@ -82,17 +82,20 @@ figma.ui.onmessage = msg => {
     // your HTML page is to use an object with a "type" property like this.
     if (msg.type === 'run') {
         const selection = figma.currentPage.selection;
-        console.log(selection);
-        let text = '';
-        text += HEADER_START;
-        for (let [idx, listItem] of selection.entries()) {
-            console.log('looping');
-            console.log(idx, listItem);
-            let rect = parseToRectangle(listItem);
-            text += rect.toString();
+        // console.log(selection);
+        if (selection.length == 0) {
+            figma.ui.postMessage({ type: 'noselection' });
         }
-        text += HEADER_END;
-        figma.ui.postMessage({ type: 'output', data: text });
+        else {
+            let text = '';
+            text += HEADER_START;
+            for (let [idx, listItem] of selection.entries()) {
+                let rect = parseToRectangle(listItem);
+                text += rect.toString();
+            }
+            text += HEADER_END;
+            figma.ui.postMessage({ type: 'output', data: text });
+        }
     }
     // Make sure to close the plugin when you're done. Otherwise the plugin will
     // keep running, which shows the cancel button at the bottom of the screen.
