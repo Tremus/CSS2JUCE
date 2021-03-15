@@ -24,7 +24,8 @@ const HEADER_START = `/*
 namespace GUI
 {
 namespace Dimensions
-{`;
+{
+`;
 
 const HEADER_END = `
 } // end namespace Dimensions
@@ -40,8 +41,14 @@ class Rectangle {
     children: Array<Rectangle>;
 
     constructor(_name: string, _x: number, _y: number, _width: number, _height: number) {
-        // TODO: remove spaces and bad characters from names
-        this.name = _name;
+        // remove spaces and non alphanumeric characters from names
+        let n = _name.replace(/\s/g, '').replace(/[^a-zA-Z0-9]/g, '_');
+        // prepends a _ if the name begins with a number
+        if (/^[0-9]/.test(n)) {
+            n = '_' + n;
+        }
+
+        this.name = n;
         this.x = _x;
         this.y = _y;
         this.width = _width;
@@ -66,7 +73,7 @@ class Rectangle {
         let text = '';
         text += `namespace ${this.name}\n`;
         text += '{\n';
-        text += `const juce::Rectangle<int> Bounds { ${this.x}, ${this.y}, ${this.width}, ${this.height} };\n`;
+        text += `const juce::Rectangle<float> Bounds { ${this.x}, ${this.y}, ${this.width}, ${this.height} };\n`;
 
         for (let i = 0; i < this.children.length; i++) {
             const child = this.children[i];
