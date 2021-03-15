@@ -11,6 +11,7 @@ const HEADER_START = `/*
  *
  * Author: Tré Dudman
  * Github: https://github.com/Tremus
+ * Repo: https://github.com/Tremus/CSS2JUCE
  * Last Compiled At: ${now}
  */
 
