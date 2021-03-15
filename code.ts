@@ -118,6 +118,7 @@ figma.ui.onmessage = msg => {
             text += HEADER_START;
             for (let [idx, listItem] of selection.entries()) {
                 let rect = parseToRectangle(listItem);
+                rect.translateChildren();
 
                 text += rect.toString();
             }
