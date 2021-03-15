@@ -1,7 +1,7 @@
 {
-    "name": "CSS > Yaml",
+    "name": "css2juce",
     "version": "1.0.0",
-    "description": "Your Figma plugin",
+    "description": "Select something within your project, run, get C++ header for JUCE GUIs",
     "main": "code.js",
     "scripts": {
         "build": "tsc -p tsconfig.json"
