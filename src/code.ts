@@ -28,11 +28,8 @@ figma.ui.onmessage = msg => {
     } else if (selection.length > 1) {
         figma.ui.postMessage({ type: 'toomanyselections' });
     } else if (msg.type === 'runHeader') {
-        // console.log('runHeader');
         runHeader();
-        figma.ui.postMessage({ type: 'pong-runHeader' });
     } else if (msg.type === 'runDeclaration') {
-        console.log('runDeclaration');
-        figma.ui.postMessage({ type: 'pong-runDeclaration' });
+        runDeclaration();
     }
 };

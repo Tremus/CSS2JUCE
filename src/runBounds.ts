@@ -75,7 +75,6 @@ const parseToRectangle = (node: SceneNode): Rectangle => {
     const rect = new Rectangle(node.name, node.x, node.y, node.width, node.height);
 
     if ('children' in node) {
-        // console.log(`${node.name} has ${node.children.length} children`);
         for (let i = 0; i < node.children.length; i++) {
             const child = node.children[i];
             const nextRect = parseToRectangle(child);

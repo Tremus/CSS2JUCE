@@ -101,10 +101,6 @@ window.onmessage = event => {
         let ele = document.getElementById('text');
         ele.textContent = pluginMessage.data;
         clearStatus();
-    } else if (pluginMessage.type === 'pong-runHeader') {
-        console.log('recived: pong-runHeader');
-    } else if (pluginMessage.type === 'pong-runDeclaration') {
-        console.log('recived: pong-runDeclaration');
     } else if (pluginMessage.type === 'noselection') {
         clearStatus();
         writeError('Error: Nothing selected!');
