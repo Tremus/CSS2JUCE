@@ -64,6 +64,7 @@ function saveAs(text, filename) {
 function runBounds() {
     clearTextarea();
     writeStatus('Generating. Please wait, this may take a few seconds...');
+    document.getElementById('output').scrollIntoView({ behavior: 'smooth' });
     setTimeout(() => {
         parent.postMessage({ pluginMessage: { type: 'runBounds' } }, '*');
     }, 50);
@@ -71,11 +72,13 @@ function runBounds() {
 
 function runHeader() {
     clearTextarea();
+    document.getElementById('output').scrollIntoView({ behavior: 'smooth' });
     parent.postMessage({ pluginMessage: { type: 'runHeader' } }, '*');
 }
 
 function runDeclaration() {
     clearTextarea();
+    document.getElementById('output').scrollIntoView({ behavior: 'smooth' });
     parent.postMessage({ pluginMessage: { type: 'runDeclaration' } }, '*');
 }
 
@@ -104,6 +107,9 @@ window.onmessage = event => {
         console.log('recived: pong-runDeclaration');
     } else if (pluginMessage.type === 'noselection') {
         clearStatus();
-        writeError('Nothing selected!');
+        writeError('Error: Nothing selected!');
+    } else if (pluginMessage.type === 'toomanyselections') {
+        clearStatus();
+        writeError('Error: You must select only 1 layer!');
     }
 };

@@ -19,9 +19,14 @@ figma.ui.resize(400, 400);
 figma.ui.onmessage = msg => {
     // One way of distinguishing between different types of messages sent from
     // your HTML page is to use an object with a "type" property like this.
+    const selection = figma.currentPage.selection;
 
-    if (msg.type === 'runBounds') {
+    if (selection.length == 0) {
+        figma.ui.postMessage({ type: 'noselection' });
+    } else if (msg.type === 'runBounds') {
         runBounds();
+    } else if (selection.length > 1) {
+        figma.ui.postMessage({ type: 'toomanyselections' });
     } else if (msg.type === 'runHeader') {
         // console.log('runHeader');
         runHeader();
