@@ -1,0 +1,89 @@
+<div style="font-family: Helvetica, sans-serif">
+    <h2>CSS 2 JUCE</h2>
+
+    <!-- NAV -->
+    <div class="nav">
+        <button id="nav-bounds" class="navitems active">Bounds</button>
+        <button id="nav-comp-h" class="navitems">Component.h</button>
+        <button id="nav-comp-cpp" class="navitems">Component.cpp</button>
+    </div>
+
+    <!-- BOUNDS -->
+    <div id="Bounds" class="navcontent" style="display: block">
+        <h3>Bounds</h3>
+        <p>
+            Generates a .h file filled with juce::Rectangle&lt;float&gt;'s based on your selected layers. Your layer
+            heirarchy is preserved through the use of namepsaces.
+        </p>
+
+        <p>Instructions:</p>
+        <ol>
+            <li>Select 1 or more layers within your project</li>
+            <li>Click 'run'</li>
+            <li>Get a C++ header for your JUCE GUI!</li>
+        </ol>
+        <div style="text-align: center">
+            <button id="runBounds" class="btn">Run</button>
+        </div>
+    </div>
+
+    <!-- COMPONENT.H -->
+    <div id="ComponentH" class="navcontent">
+        <h3>Component.h</h3>
+        <p>
+            Generates a juce::Component .h header file based on the currently selected layer. Direct children are added
+            as private members.
+        </p>
+
+        <p>Instructions:</p>
+        <ol>
+            <li>Select a single layer within your project</li>
+            <li>Click 'run'</li>
+            <li>Get a C++ header for your JUCE GUI!</li>
+        </ol>
+        <div style="text-align: center">
+            <button id="runHeader" class="btn">Run</button>
+        </div>
+    </div>
+
+    <!-- COMPONENT.CPP -->
+    <div id="ComponentCpp" class="navcontent">
+        <h3>Component.cpp</h3>
+        <p>
+            Generates a juce::Component .cpp declaration file based on the currently selected layer. Direct children of
+            the selected layer are made visible and have their size automatically set by calling
+            addAndMakeVisible(m_some_child) within the constructor and m_some_child.setBounds(GUI::Dimensions::Bounds)
+            within the resize() method.
+        </p>
+
+        <p>Instructions:</p>
+        <ol>
+            <li>Select a single layer within your project</li>
+            <li>Click 'run'</li>
+            <li>Get a C++ declaration for your JUCE GUI!</li>
+        </ol>
+        <div style="text-align: center">
+            <button id="runDeclaration" class="btn">Run</button>
+        </div>
+    </div>
+
+    <!-- OUTPUT -->
+    <div style="display: flex; justify-content: space-between; padding-top: 2rem">
+        <h3 style="margin: 0">Output:</h3>
+        <button id="clear" class="btn">Clear</button>
+    </div>
+    <div style="font-size: 12px">
+        <p id="status"></p>
+        <p id="errors" style="color: orangered"></p>
+    </div>
+
+    <textarea
+        id="text"
+        style="width: 100%; min-height: 150px"
+        placeholder="Your generated code will go here..."
+    ></textarea>
+
+    <div style="text-align: center">
+        <button id="save" class="btn" style="margin-top: 2rem">Save</button>
+    </div>
+</div>
