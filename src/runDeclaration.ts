@@ -20,7 +20,7 @@ ${classname}View::${classname}View(MyEditor& e): editor(e)
 {`;
 
 const getAddAndMakeVisible = (classname: string): string => `
-    addAndMakeVisible(m${classname});`;
+    addAndMakeVisible(m${classname}View);`;
 
 const getHeaderPt2 = (classname: string): string => `
 }
@@ -51,7 +51,7 @@ const getLevelNames = (node: SceneNode): Array<string> => {
 
 const getNamespace = (levels: Array<string>): string => {
     const str = levels.join('::');
-    return `using namespace GUI::Dimensions::${str}\n`;
+    return `using namespace GUI::Dimensions::${str};\n`;
 };
 const getSetChildBounds = (classname: string): string => `
     m${classname}View.setBounds((${classname}::Bounds * editor.mScaleFactor).toNearestInt());`;

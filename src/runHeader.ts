@@ -36,7 +36,7 @@ private:
     MyEditor& editor;
 `;
 const getChildProperty = (classname: string): string => `
-    ${classname}View { editor };`;
+    ${classname}View m${classname}View { editor };`;
 
 const getHeaderPt3 = (classname: string): string => `
 
