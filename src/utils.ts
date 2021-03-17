@@ -29,6 +29,8 @@ export const getDateString = (): string => {
         hour = fullhour - 12;
     } else if (fullhour === 0) {
         hour = 12;
+    } else {
+        hour = fullhour;
     }
 
     const meridiem = fullhour < 12 ? 'am' : 'pm';
