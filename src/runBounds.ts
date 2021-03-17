@@ -97,7 +97,7 @@ const runBounds = (): void => {
     }
     text += HEADER_END;
 
-    figma.ui.postMessage({ type: 'output', data: text });
+    figma.ui.postMessage({ type: 'output', payload: { name: 'Dimensions.h', text } });
 };
 
 export default runBounds;

@@ -88,7 +88,7 @@ const runDeclaration = (): void => {
     }
     text += getHeaderPt3(name);
 
-    figma.ui.postMessage({ type: 'output', data: text });
+    figma.ui.postMessage({ type: 'output', payload: { name: `${name}View.cpp`, text } });
 };
 
 export default runDeclaration;

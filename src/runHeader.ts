@@ -71,7 +71,7 @@ const runHeader = (): void => {
     }
     text += getHeaderPt3(name);
 
-    figma.ui.postMessage({ type: 'output', data: text });
+    figma.ui.postMessage({ type: 'output', payload: { name: `${name}View.h`, text } });
 };
 
 export default runHeader;

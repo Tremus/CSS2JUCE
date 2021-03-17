@@ -89,7 +89,8 @@ function saveToFile() {
     if (text.length == 0) {
         writeError('No text to save!');
     } else {
-        saveAs(text, 'CSS2JUCE.h');
+        const filename = ele.getAttribute('_data') || 'CSS2JUCE.h';
+        saveAs(text, filename);
     }
 }
 
@@ -98,8 +99,10 @@ window.onmessage = event => {
 
     if (pluginMessage.type === 'output') {
         writeStatus('Finished!');
+        const { payload } = pluginMessage;
         let ele = document.getElementById('text');
-        ele.textContent = pluginMessage.data;
+        ele.textContent = payload.text;
+        ele.setAttribute('_data', payload.name);
         clearStatus();
     } else if (pluginMessage.type === 'noselection') {
         clearStatus();
