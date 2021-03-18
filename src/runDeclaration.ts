@@ -1,12 +1,11 @@
 import { getDateString, cleanString } from './utils';
 
-const getHeaderPt1 = (classname: string): string => `
-/*
+const getHeaderPt1 = (classname: string): string => `/*
   ==============================================================================
 
-  ${classname}View.cpp
-  Created: ${getDateString()}
-  Author:  CSS 2 JUCE
+    ${classname}View.cpp
+    Created: ${getDateString()}
+    Author:  CSS 2 JUCE
 
   ==============================================================================
 */
