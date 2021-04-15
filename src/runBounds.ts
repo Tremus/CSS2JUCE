@@ -10,7 +10,7 @@ const getHeaderStart = (): string => `/*
  * Last Compiled At: ${getDateString()}
  */
 
-#pragma onces
+#pragma once
 #include <JuceHeader.h>
 
 namespace GUI
