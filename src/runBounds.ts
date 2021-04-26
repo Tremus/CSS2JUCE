@@ -34,10 +34,10 @@ class Rectangle {
 
     constructor(_name: string, _x: number, _y: number, _width: number, _height: number) {
         this.name = cleanString(_name);
-        this.x = _x;
-        this.y = _y;
-        this.width = _width;
-        this.height = _height;
+        this.x = Math.round(_x);
+        this.y = Math.round(_y);
+        this.width = Math.round(_width);
+        this.height = Math.round(_height);
         this.children = [];
     }
 
@@ -58,7 +58,7 @@ class Rectangle {
         let text = '';
         text += `namespace ${this.name}\n`;
         text += '{\n';
-        text += `const juce::Rectangle<float> Bounds { ${this.x}, ${this.y}, ${this.width}, ${this.height} };\n`;
+        text += `const juce::Rectangle<float> Bounds { ${this.x}.0f, ${this.y}.0f, ${this.width}.0f, ${this.height}.0f };\n`;
 
         for (let i = 0; i < this.children.length; i++) {
             const child = this.children[i];
