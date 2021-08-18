@@ -22,7 +22,10 @@ namespace Dimensions
 const HEADER_END = `
 } // end namespace Dimensions
 
-} // end namespace GUI`;
+} // end namespace GUI
+`;
+
+const isNameValid = (name: string): boolean => !name.startsWith('_');
 
 class Rectangle {
     name: string;
@@ -77,6 +80,10 @@ const parseToRectangle = (node: SceneNode): Rectangle => {
     if ('children' in node) {
         for (let i = 0; i < node.children.length; i++) {
             const child = node.children[i];
+
+            if (!isNameValid(child.name))
+                continue;
+
             const nextRect = parseToRectangle(child);
             rect.children.push(nextRect);
         }
