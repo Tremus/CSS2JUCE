@@ -2,11 +2,8 @@
 // You can access browser APIs in the <script> tag inside "ui.html" which has a
 // full browser environment (see documentation).
 
-// const runBounds = require('./src/runBounds');
 import runBounds from './runBounds';
-// const runHeader = require('./src/runHeader');
 import runHeader from './runHeader';
-// const runDeclaration = require('./src/runDeclaration');
 import runDeclaration from './runDeclaration';
 
 // This shows the HTML page in "ui.html".

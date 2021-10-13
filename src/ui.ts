@@ -1,9 +1,12 @@
 import './ui.css';
+import * as JSZip from '../node_modules/jszip/dist/jszip';
+import { TextFiles } from './runBounds';
+
 /****** Document ********/
 window.onload = function () {
-    document.getElementById('nav-bounds').onclick = e => openCity(e, 'Bounds');
-    document.getElementById('nav-comp-h').onclick = e => openCity(e, 'ComponentH');
-    document.getElementById('nav-comp-cpp').onclick = e => openCity(e, 'ComponentCpp');
+    document.getElementById('nav-bounds').onclick = e => handleTabClick(e, 'Bounds');
+    document.getElementById('nav-comp-h').onclick = e => handleTabClick(e, 'ComponentH');
+    document.getElementById('nav-comp-cpp').onclick = e => handleTabClick(e, 'ComponentCpp');
     document.getElementById('runBounds').onclick = e => runBounds();
     document.getElementById('runHeader').onclick = e => runHeader();
     document.getElementById('runDeclaration').onclick = e => runDeclaration();
@@ -34,7 +37,7 @@ function clearTextarea() {
     let ele = document.getElementById('text');
     ele.textContent = '';
 }
-function openCity(evt, cityName) {
+function handleTabClick(evt, tabName) {
     var i, navcontent, navitems;
     navcontent = document.getElementsByClassName('navcontent');
     for (i = 0; i < navcontent.length; i++) {
@@ -44,7 +47,7 @@ function openCity(evt, cityName) {
     for (i = 0; i < navitems.length; i++) {
         navitems[i].className = navitems[i].className.replace(' active', '');
     }
-    document.getElementById(cityName).style.display = 'block';
+    document.getElementById(tabName).style.display = 'block';
     evt.currentTarget.className += ' active';
 }
 function saveAs(text, filename) {
@@ -104,6 +107,17 @@ window.onmessage = event => {
         ele.textContent = payload.text;
         ele.setAttribute('_data', payload.name);
         clearStatus();
+    } else if (pluginMessage.type === 'zip') {
+        const files: TextFiles = pluginMessage.payload;
+        var zip = new JSZip();
+        for (const file of files) {
+            zip.file(file.name, file.body);
+        }
+        zip.generateAsync({ type: 'base64' }).then(base64 => {
+            location.href = 'data:application/zip;base64,' + base64;
+
+            clearTextarea();
+        });
     } else if (pluginMessage.type === 'noselection') {
         clearStatus();
         writeError('Error: Nothing selected!');

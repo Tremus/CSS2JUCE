@@ -21,5 +21,8 @@
         "url-loader": "^4.1.1",
         "webpack": "^5.26.1",
         "webpack-cli": "^4.6.0"
+    },
+    "dependencies": {
+        "jszip": "^3.7.1"
     }
 }
