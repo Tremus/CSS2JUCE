@@ -12,7 +12,7 @@ const getHeaderPt1 = (classname: string): string => `/*
 
 #pragma once
 
-#include <JuceHeader.h>
+#include <juce_core/juce_core.h>
 #include <Utils.h>`;
 
 const getIncludeHeader = (classname: string): string => `

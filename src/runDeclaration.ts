@@ -10,7 +10,7 @@ const getHeaderPt1 = (classname: string): string => `/*
   ==============================================================================
 */
 
-#include <JuceHeader.h>
+#include <juce_core/juce_core.h>
 #include <MyEditor.h>
 #include "${classname}View.h"
 
